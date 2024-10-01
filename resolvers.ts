@@ -26,6 +26,19 @@ export const resolvers = {
       const newArticle= new Article(article);
       await newArticle.save();
       return newArticle
+    },
+    deleteArticle:async (_,args)=>{
+      const id=args.id;
+      await Article.updateOne({
+        _id:id
+      },{
+        deleted:true
+      })
+      return {
+        code:200,
+        message:"Xoa thanh cong"
+      };
     }
+
   }
 }
