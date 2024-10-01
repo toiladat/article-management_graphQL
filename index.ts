@@ -5,7 +5,7 @@ import express, { Express, Request, Response } from 'express'
 import { ApolloServer, gql } from 'apollo-server-express';
 import { connectDatabase } from './config/database'
 
-import { typeDefs } from './typedefs';
+import { typeDefs } from './typedefs/index.typedefs';
 import {resolvers} from './resolvers'
 import Article from './models/article.model'
 dotenv.config();
