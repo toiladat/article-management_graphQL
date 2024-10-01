@@ -36,7 +36,8 @@ export const articleTypeDefs = gql`
         title:String,
         avatar:String,
         description:String,
-        categoryId:String
+        categoryId:String,
+        keyword:String
     }
     type Mutation{
       createArticle(article:ArticleInput):Article,

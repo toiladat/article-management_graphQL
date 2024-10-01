@@ -29,6 +29,16 @@ export const articleResolvers = {
       if(fillterKey&& fillterValue)
         find[fillterKey]=fillterValue
       //end fillter
+
+      //search
+      const keyword=args.keyword;
+      if(keyword){
+        const regex=new RegExp(keyword,'i');
+        find['title']=regex
+      }
+      //end search
+
+
       const articles = await Article.find(find)
       .limit(limitItems)
       .skip(skipItems)
