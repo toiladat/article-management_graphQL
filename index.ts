@@ -6,8 +6,7 @@ import { ApolloServer, gql } from 'apollo-server-express';
 import { connectDatabase } from './config/database'
 
 import { typeDefs } from './typedefs/index.typedefs';
-import {resolvers} from './resolvers'
-import Article from './models/article.model'
+import {resolvers} from './resolvers/index.resolvers'
 dotenv.config();
 const app: Express = express();
 const port: number | string = 3000;
