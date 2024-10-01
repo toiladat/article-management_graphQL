@@ -4,10 +4,35 @@ import Article from "../models/article.model"
 import Category from "../models/category-models"
 export const articleResolvers = {
   Query: {
-    getListArticle: async () => {
-      const articles = await Article.find({
-        deleted: false
-      })
+    getListArticle: async (_,args) => {
+      //sort
+      const sortKey=args.sortKey
+      const sortValue=args.sortValue
+      const sort={}
+      if(sortKey&&sortValue){
+        sort[`${sortKey}`]=sortValue
+      }
+      //end sort
+
+      // pagination
+      const limitItems:number= parseInt(args.limitItems)
+      const page:number= parseInt(args.page)
+      const skipItems=(page-1)*limitItems
+      // end pagination
+      
+      //fillter
+      const find={
+        deleted:false
+      }
+      const fillterKey=args.fillterKey
+      const fillterValue=args.fillterValue
+      if(fillterKey&& fillterValue)
+        find[fillterKey]=fillterValue
+      //end fillter
+      const articles = await Article.find(find)
+      .limit(limitItems)
+      .skip(skipItems)
+      .sort(sort)
       return articles
     },
     getArticle: async (_, args) => {
