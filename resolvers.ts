@@ -38,7 +38,18 @@ export const resolvers = {
         code:200,
         message:"Xoa thanh cong"
       };
+    },
+    updateArticle:async(_,args)=>{
+      const id=args._id;
+      await Article.updateOne({
+        _id:id
+      }, args.article
+      )
+      return {
+        code:200,
+        message:"Cap nhat thanh cong"
+      }
     }
-
+ 
   }
 }
