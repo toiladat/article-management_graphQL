@@ -2,7 +2,29 @@ import User from "../models/user.models"
 import { generateRandomString } from "../helper/generate.helper"
 import md5 from 'md5'
 export const userResolvers={
+  Query:{
+    
+    getUser:async(_,args)=>{
+      const token=args.token
+      const existUser=await User.findOne({
+        token:token,
+        deleted:false
+      })
+      if(existUser){
+        return {
+          code:200,
+          fullName:existUser.fullName,
+          email:existUser.email,
+        }
+      }
+      else
+        return {
+          code:400,
+          message:"User not found"
+        }
 
+    }
+  },
   Mutation:{
     register:async (_,args)=>{
       const {user}=args
